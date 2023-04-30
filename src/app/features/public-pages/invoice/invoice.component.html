@@ -1,0 +1,125 @@
+<h1 class = "no-printme"></h1>
+
+<div class='printme'>
+  Print this only
+</div>
+
+
+
+<div class="container" *ngIf="invoiceDetails">
+  <button class="btn btn-secondary float-md-end" onclick={window.print()}>Print</button>
+  <h3 class="text-center">Final Details for Order Code {{invoiceDetails?.orderCode || ''}}</h3>
+  <div class="row">
+    <div class="col-6">
+      <label *ngIf="paymentMethod && paymentMethod.length > 0"><strong>Paid By : </strong>{{paymentMethod[0].cardHolderName || ''}}</label>
+    </div>
+    <label><strong>Order Placed : </strong> {{invoiceDetails?.orderPlaced | date: 'fullDate'}}</label>
+    <label><strong>Order Status : </strong><span class="badge"
+                                                 [ngClass]="invoiceDetails?.orderStatus === 'DELIVERED' ? 'bg-primary': 'bg-danger' ">{{invoiceDetails?.orderStatus || 'PENDING'}}</span>
+    </label>
+    <label><strong>Order Total : {{invoiceDetails?.totalAfterTax | currency: 'USD'}}</strong></label>
+  </div>
+  <br>
+  <div class="col">
+    <div class="card mb-4 rounded-3">
+      <div class="card-header py-3">
+        <strong>Shipped on {{invoiceDetails?.shippedDate}}</strong>
+      </div>
+      <div class="card-body card card-outline-primary text-xs-center bg-light p-y-1">
+        <div class="row">
+          <div class="col-md-10">
+            <strong class="card-title pricing-card-title font-weight-bold">Items Ordered</strong>
+            <ul class="list-unstyled mt-3 mb-4" *ngFor="let orderItem of orderItems; let i=index">
+              <li><strong>{{i + 1}})</strong> {{orderItem.product.name}}, {{orderItem.product.description}},
+                Qty {{orderItem.quantity}}</li>
+            </ul>
+          </div>
+          <div class="col-2">
+            <strong class="card-title pricing-card-title font-weight-bold">Price</strong>
+            <ul class="list-unstyled mt-3 mb-4" *ngFor="let orderItem of orderItems">
+              <li>{{orderItem.price * orderItem.quantity | number:'0.2'}}</li>
+            </ul>
+          </div>
+        </div>
+        <hr class="solid"/>
+        <div class="row">
+          <div class="col-7">
+            <strong class="card-title pricing-card-title font-weight-bold">Shipping Address:</strong>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>{{shippingAddress.address.address1}}</li>
+              <li>{{shippingAddress.address.city}}, {{shippingAddress.address.state}}</li>
+              <li>{{shippingAddress.address.country}}</li>
+            </ul>
+          </div>
+          <div class="col-3">
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Item(s) Subtotal:</li>
+              <li>Shipping & Handling:</li>
+              <li>..................................................</li>
+              <li>Total before tax:</li>
+              <li>Sales Tax:</li>
+              <li>..................................................</li>
+              <li class="text-black"><strong>Total for this Shipment: </strong></li>
+            </ul>
+          </div>
+          <div class="col-2">
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>{{invoiceDetails.totalBeforeTax | number:'0.2'}}</li>
+              <li>0.0</li>
+              <li>....................</li>
+              <li class="text-black">{{invoiceDetails.totalBeforeTax | number:'0.2'}}</li>
+              <li class="text-black">{{invoiceDetails.tax | number:'0.2'}}</li>
+              <li>....................</li>
+              <li class="text-black"><strong>{{invoiceDetails.totalAfterTax | number:'0.2'}}</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card mb-4 rounded-3 shadow-sm">
+      <div class="card-header">
+        <h5 class="my-0 fw-semibold">Payment Information</h5>
+      </div>
+      <div class="card-body card card-outline-primary text-xs-center bg-light p-y-1">
+        <div class="row">
+          <div class="col-md-7">
+            <div *ngIf="paymentMethod && paymentMethod.length > 0">
+            <strong class="card-title pricing-card-title">Payment Method:</strong>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>{{paymentMethod[0].cardBrand || ''}}</li>
+              <li>{{paymentMethod[0].paymentStatus || ''}}</li>
+              <li>{{paymentMethod[0].cardHolderName || ''}}</li>
+            </ul>
+            </div>
+          </div>
+          <div class="col-3">
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Item(s) Subtotal:</li>
+              <li>Shipping & Handling:</li>
+              <li>..................................................</li>
+              <li>Total before tax:</li>
+              <li>Estimated Tax:</li>
+              <li>..................................................</li>
+              <li class="text-black"><strong>Grand Total: </strong></li>
+            </ul>
+          </div>
+          <div class="col-2">
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>{{invoiceDetails.totalBeforeTax | number:'0.2'}}</li>
+              <li>0.0</li>
+              <li>....................</li>
+              <li class="text-black">{{invoiceDetails.totalBeforeTax | number:'0.2'}}</li>
+              <li class="text-black">{{invoiceDetails.tax | number:'0.2'}}</li>
+              <li>....................</li>
+              <li class="text-black"><strong>{{invoiceDetails.totalAfterTax | number:'0.2'}}</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

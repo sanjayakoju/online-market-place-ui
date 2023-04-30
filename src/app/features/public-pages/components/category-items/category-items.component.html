@@ -1,0 +1,20 @@
+<div class="row row g-4 py-5 row-cols-1 row-cols-lg-3">
+    <div class="category-items feature col" *ngFor="let category of topCategories">
+        
+        <div class="product-item__image" *ngIf="category.fileUri; else placeholderImg">
+            <img class="category-items_img" [src]="category.fileUri" class="sc-dOSRxR dyobCP" title="category image">
+        </div>
+
+        <ng-template #placeholderImg>
+            <img src="https://via.placeholder.com/640x480" class="card-img-top" alt="placeholder image"
+                title="product image" />
+        </ng-template>
+
+        <div class="category-items_info">
+            <h1 class="category-items_title">{{ category.category }}</h1>
+            <a [href]="category.fileUri"><button class="category-items_button" >SHOP NOW</button></a>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,17 @@
+export enum Order {
+  ASC='ASC',DESC='DESC'
+}
+
+
+export enum OrderStatusModel {
+  PENDING='PENDING',
+  CONFIRMED='CONFIRMED',
+  SHIPPED='SHIPPED',
+  DELIVERED='DELIVERED',
+  CANCELED='CANCELED'
+}
+
+export enum OrderItemModel {
+  REQUESTED= 'REQUESTED',
+  WAREHOUSE_SHIP='WAREHOUSE_SHIP'
+}

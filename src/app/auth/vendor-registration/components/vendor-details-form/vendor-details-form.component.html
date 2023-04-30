@@ -1,0 +1,30 @@
+<div class="text">
+    <h2>Your Personal Information</h2>
+    <p>Enter more details complete details, to help customers know better.</p>
+</div>
+
+<div [formGroup]="parentForm">
+
+    <div formGroupName="vendorDetails">
+        <div class="mb-3">
+            <label class="form-label"><span class="text-danger">*</span> Company Name</label>
+            <input type="text" class="form-control" placeholder="Company Name" formControlName="companyName"
+                appAutoFocus>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" placeholder="Description" formControlName="description"></textarea>
+        </div>
+
+        <!-- <div class="mb-3">
+        <label class="form-label">Logo</label>
+        <input type="file" class="form-control" formControlName="logo">
+    </div> -->
+
+        <div class="text-start">
+            <button class="btn btn-secondary btn-lg me-3" type="button" (click)="onNext(false)">Previous</button>
+            <button type="button" class="btn btn-primary btn-lg" (click)="onNext(true)"
+                [disabled]="!currentFormGroup.valid">Next</button>
+        </div>
+    </div>
+</div>

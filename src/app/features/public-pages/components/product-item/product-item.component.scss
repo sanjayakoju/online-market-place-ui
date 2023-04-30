@@ -1,0 +1,38 @@
+.product {
+    &-item {
+
+        a {
+            color: #000;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            color:#000; 
+            text-decoration:none; 
+            cursor:pointer;  
+        }
+        
+        &__image img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        &__content {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+            height: 15rem;
+        }
+
+        &__description {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* number of lines to show */
+                    line-clamp: 2; 
+            -webkit-box-orient: vertical;
+        }
+    }
+}
